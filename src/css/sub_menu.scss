@@ -1,0 +1,167 @@
+$gray: #343436;
+$not-black-but-dark: #1c1b20;
+$silver: #f8f8f8;
+
+//GLOBAL STYLES
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+    list-style: none;
+	background-size: cover;
+	background-repeat: no-repeat;
+	font-family: sans-serif;
+}
+
+//MIXIN
+@mixin flexcenter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+//MAIN CSS
+.sub-menu {
+	height: 100vh;
+	width: 100%;
+	.menu-btn {
+		position: fixed;
+		top: 30px;
+		left: 30px;
+		height: 50px;
+		width: 50px;
+		border-radius: 100%;
+		background-color: $silver;
+		color: $not-black-but-dark;
+		z-index: 6;
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	.menu-btn span{
+		position: absolute;
+		width: 50%;
+		height: 2px;
+		background-color: #1c1b20;
+		margin: auto;
+		inset: 0;
+		transition-duration: 700ms;
+	}
+	.menu-btn span:first-child{
+		transform: translateY(-10px);
+		&.active{
+			transform: rotate(225deg) translateY(0);
+			transition-duration: 700ms;
+		}
+	}
+	.menu-btn span:nth-child(2){
+		opacity: 1;
+		&.active{
+			opacity: 0;
+			transition-duration: 1000ms;
+		}
+	}
+	.menu-btn span:last-child{
+		transform: translateY(10px);
+		&.active{
+			transform: rotate(-225deg) translateY(0);
+			transition-duration: 700ms;
+		}
+	}
+
+	.overlay {
+		position: fixed;
+		top: 30px;
+		left: 30px;
+		height: 50px;
+		width: 50px;
+		border-radius: 100%;
+		background-color: #eeeeee;
+		transition-duration: 700ms;
+		z-index: 4;
+
+		&.active {
+			transform: scale(100, 100);
+		}
+	}
+
+	.menu-container {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100vh;
+		width: 100%;
+		z-index: -5;
+		opacity: 0;
+		transition: opacity 700ms;
+		@include flexcenter();
+
+		.menu-wrapper {
+			list-style: none;
+
+			li {
+				width: 100vw;
+				margin: 10px 0;
+				display: flex;
+
+				a {
+					width: 100%;
+					text-decoration: none;
+					letter-spacing: 5px;
+					font-weight: 700;
+					font-size: 15vmin;
+					text-align: center;
+					color: rgba(255, 255, 255, 0);
+					-webkit-text-stroke: 1.4px $gray;
+					transition-duration: 200ms;
+
+					&:hover {
+						color: $gray;
+						-webkit-text-stroke: 0px $gray;
+					}
+				}
+
+				span {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+
+					font-size: 68vmin;
+					font-weight: 900;
+					color: rgba(0, 0, 0, 0.2);
+				}
+			}
+		}
+
+		&.active {
+			transition-delay: 00ms;
+			opacity: 1;
+			z-index: 5;
+		}
+	}
+
+	.sub-menu-content {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		background-color: $gray;
+		color: $silver;
+		@include flexcenter();
+		flex-direction: column;
+
+		div {
+			font-size: 20vmin;
+			font-weight: 700;
+
+			span {
+				font-size: 40px;
+				font-weight: 400;
+			}
+		}
+	}
+}
